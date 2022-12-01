@@ -1,4 +1,4 @@
-
+import re
 
 SAMPLE_DATA: bool = False
 if SAMPLE_DATA:
@@ -6,19 +6,9 @@ if SAMPLE_DATA:
 else:
     filename = "data.txt"
 
+patt = re.compile(r'((?:\d+\n?)+)\n?', re.MULTILINE)
+
 with open(filename, 'r') as f:
-    lines = [line.strip() for line in f.readlines()]
+    calories = sorted([sum([int(s) for s in m.strip().split('\n')]) for m in patt.findall(f.read())], reverse=True)[:3]
+print(f'Part 1: {calories[0]}\nPart 2: {sum(calories)}')
 
-calories = []
-
-curr_cal = 0
-for line in lines:
-    if len(line) == 0:
-        calories.append(curr_cal)
-        curr_cal = 0
-    else:
-        curr_cal += int(line)
-calories = sorted(calories, reverse=True)
-print(f'Part 1: {calories[0]}')
-sum_top_three = sum(sorted(calories, reverse=True)[:3])
-print(f'Part 2: {sum_top_three}')
