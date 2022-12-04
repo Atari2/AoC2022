@@ -10,5 +10,5 @@ patt = re.compile(r'((?:\d+\n?)+)\n?', re.MULTILINE)
 
 with open(filename, 'r') as f:
     calories = sorted([sum([int(s) for s in m.strip().split('\n')]) for m in patt.findall(f.read())], reverse=True)[:3]
-print(f'Part 1: {calories[0]}\nPart 2: {sum(calories)}')
+print(f'{calories[0]} {sum(calories)}')
 

@@ -40,8 +40,6 @@ int main() {
         sum += top_three[i];
     }
 
-    printf("Sum of top three: %d\n", sum);
-    printf("Max: %d\n", top_three[0]);
-
+    printf("%d %d", top_three[0], sum);
     return 0;
 }

@@ -33,6 +33,6 @@ int main() {
         tot_score_1 += rps_mat[x][y] + y + 1;
         tot_score_2 += tr_mat[x * 3 + y][0] + tr_mat[x * 3 + y][1];
     }
-    printf("%d %d\n", tot_score_1, tot_score_2);
+    printf("%d %d", tot_score_1, tot_score_2);
     return 0;
 }

@@ -7,11 +7,11 @@
 #define FILENAME "data.txt"
 #endif
 
-void part1() {
+int part1() {
     FILE *fp = fopen(FILENAME, "r");
     if (fp == NULL) {
         printf("Error opening file " FILENAME "\n");
-        return;
+        return -1;
     }
     const char values[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const size_t values_len = sizeof(values);
@@ -34,14 +34,14 @@ void part1() {
             }
         }
     }
-    printf("Part 1: %d\n", tot);
+    return tot;
 }
 
-void part2() {
+int part2() {
     FILE *fp = fopen(FILENAME, "r");
     if (fp == NULL) {
         printf("Error opening file " FILENAME "\n");
-        return;
+        return -1;
     }
     const char values[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const size_t values_len = sizeof(values);
@@ -65,11 +65,10 @@ void part2() {
             }
         }
     }
-    printf("Part 2: %d\n", tot);
+    return tot;
 }
 
 int main() {
-    part1();
-    part2();
+    printf("%d %d", part1(), part2());
     return 0;
 }

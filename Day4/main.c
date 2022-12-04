@@ -32,6 +32,6 @@ int main()
             count_part2 += 1;
         }
     }
-    printf("Part 1: %d\nPart 2: %d\n", count_part1, count_part2);
+    printf("%d %d", count_part1, count_part2);
     return 0;
 }
