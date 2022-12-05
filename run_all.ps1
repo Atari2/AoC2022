@@ -19,14 +19,17 @@ Get-Content EXPECTED.lst | ForEach-Object {
         Write-Host "Python FAIL: $dir"
         Write-Host "Expected: $exp_part1 $exp_part2 but got $part1 $part2"
     }
-    cl /nologo /O2 main.c | Out-Null
-    $part1, $part2 = (.\main.exe).Split(" ")
-    if ($part1 -eq $exp_part1 -and $part2 -eq $exp_part2) {
-        Write-Host "C OK: $dir"
+    if (Test-Path main.c -PathType Leaf) {
+        # only test the C version if it exists
+        cl /nologo /O2 main.c | Out-Null
+        $part1, $part2 = (.\main.exe).Split(" ")
+        if ($part1 -eq $exp_part1 -and $part2 -eq $exp_part2) {
+            Write-Host "C OK: $dir"
+        }
+        else {
+            Write-Host "C FAIL: $dir"
+            Write-Host "Expected: $exp_part1 $exp_part2 but got $part1 $part2"
+        }
     }
-    else {
-        Write-Host "C FAIL: $dir"
-        Write-Host "Expected: $exp_part1 $exp_part2 but got $part1 $part2"
-    } 
     Pop-Location
 }
