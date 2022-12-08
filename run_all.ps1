@@ -1,3 +1,4 @@
+py -m pip install numpy
 if (Get-Command cl -errorAction SilentlyContinue) {
     Write-Host "MSVC compiler already available"
 }
