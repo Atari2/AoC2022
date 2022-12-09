@@ -17,7 +17,7 @@ tot_score = 0
 for line in lines:
     other, me = line.strip().split(' ')
     tot_score += scores[ord(other) - ord('A')][ord(me) - ord('X')] + (ord(me) - ord('X') + 1)
-transforms = {
+transforms: dict[tuple[str, str], tuple[int, int]] = {
     ('A', 'X'): (3, 0),
     ('A', 'Y'): (1, 3),
     ('A', 'Z'): (2, 6),
