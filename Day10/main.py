@@ -14,15 +14,22 @@ class CRT:
     _col: int = 0
 
     def __init__(self):
-        self._matrix = numpy.array([['.'] * self._width] * self._height, dtype=str)
+        self._matrix = numpy.zeros((self._height, self._width), dtype=str)
     
     def __str__(self):
         return '\n'.join([''.join(row) for row in self._matrix])
 
     def draw_pixel(self, pos: int):
-        pass
-        
-        
+        if self._col == self._width:
+            self._col = 0
+            self._row += 1
+        if pos - 1 <= self._col <= pos + 1:
+            print(f'Drawing pixel for x={pos} at ({self._row},{self._col})')
+            self._matrix[self._row,self._col] = '#' 
+        else:
+            print(f'Not drawing pixel for x={pos} at ({self._row},{self._col})')
+            self._matrix[self._row,self._col] = '.'
+        self._col += 1
 
 class CPU:
     _x: int
@@ -46,20 +53,20 @@ class CPU:
 
     def one_cycle(self):
         if self._cycles == 20:
-            print("20 cycles reached")
-            print(f"Signal strength: {(self.x * self._cycles)}")
             self.signal_strength += (self.x * self._cycles)
         elif self._cycles > 20 and ((self._cycles - 20) % 40) == 0:
-            print(f"{self._cycles} cycles reached")
-            print(f"Signal strength: {(self.x * self._cycles)}, {self.x} * {self._cycles}")
             self.signal_strength += (self.x * self._cycles)
         self._cycles += 1
+        print(self._cycles)
         self._crt.draw_pixel(self._x)
+    
+    @property
+    def crt(self):
+        return self._crt
 
 
     
 class Instruction:
-    
     def execute(self, cpu: CPU):
         raise ValueError("Not implemented")
 
@@ -90,3 +97,4 @@ for insn in instructions:
     insn.execute(cpu)
 
 print(cpu.signal_strength)
+print(cpu.crt)
