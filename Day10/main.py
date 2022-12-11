@@ -24,10 +24,8 @@ class CRT:
             self._col = 0
             self._row += 1
         if pos - 1 <= self._col <= pos + 1:
-            print(f'Drawing pixel for x={pos} at ({self._row},{self._col})')
             self._matrix[self._row,self._col] = '#' 
         else:
-            print(f'Not drawing pixel for x={pos} at ({self._row},{self._col})')
             self._matrix[self._row,self._col] = '.'
         self._col += 1
 
@@ -57,7 +55,6 @@ class CPU:
         elif self._cycles > 20 and ((self._cycles - 20) % 40) == 0:
             self.signal_strength += (self.x * self._cycles)
         self._cycles += 1
-        print(self._cycles)
         self._crt.draw_pixel(self._x)
     
     @property
@@ -96,5 +93,8 @@ cpu = CPU()
 for insn in instructions:
     insn.execute(cpu)
 
-print(cpu.signal_strength)
-print(cpu.crt)
+
+print(cpu.signal_strength, 'ZUPRFECL')
+# this prints the ascii ART of the CRT.
+# it says 'ZUPRFECL'
+# print(cpu.crt)
